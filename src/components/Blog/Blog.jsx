@@ -1,10 +1,11 @@
-import PropTypes from 'prop-types'; 
-const Blog = ({blog}) => {
-const {title, cover, reading_time, author_img, author, posted_date} = blog;
+import PropTypes from 'prop-types';
+import { CiBookmark } from "react-icons/ci";
+const Blog = ({ blog }) => {
+    const { title, cover, reading_time, author_img, author, posted_date, hashtags } = blog;
     return (
-        <div>
-            <img src={cover} alt={`Cover picture of the title: ${title}`} />
-            <div className='flex justify-between'>
+        <div className='mb-20'>
+            <img className='w-full mb-8' src={cover} alt={`Cover picture of the title: ${title}`} />
+            <div className='flex justify-between mb-4'>
                 <div className='flex'>
                     <img className='w-14 rounded-full' src={author_img} alt="" />
                     <div className='ml-6'>
@@ -12,11 +13,21 @@ const {title, cover, reading_time, author_img, author, posted_date} = blog;
                         <p>{posted_date}</p>
                     </div>
                 </div>
-                <div>
-                    <span>{reading_time} min read</span>
+                <div className='flex items-center'>
+                    <span>{reading_time} read</span>
+                    <button className='ml-2 text-xl'><CiBookmark /></button>
                 </div>
             </div>
             <h2 className='text-4xl'>{title}</h2>
+            <p>
+                {
+                    hashtags.map((hashtag, idx) => (
+                        <span key={idx} className="mr-2 text-gray-500 hover:text-gray-700">
+                            <a href="">{hashtag}</a>
+                        </span>
+                    ))
+                }
+            </p>
         </div>
     );
 };
